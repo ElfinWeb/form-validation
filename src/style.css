@@ -9,7 +9,7 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   color: #b9b9b9;
-  background: linear-gradient(#06beb6, #48b1bf);
+  background: linear-gradient(65deg, #06beb6, #48b1bf);
 }
 h4 {
   color: #0084f0;

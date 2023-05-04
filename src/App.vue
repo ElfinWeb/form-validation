@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <form>
+    <form @submit.prevent="validateTerms">
       <div class="row">
         <h4>Account</h4>
         <div class="input-group input-group-icon">
@@ -35,43 +35,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-half">
-          <h4>Date of Birth</h4>
-          <div class="input-group">
-            <div class="col-third">
-              <input type="text" placeholder="DD" />
-            </div>
-            <div class="col-third">
-              <input type="text" placeholder="MM" />
-            </div>
-            <div class="col-third">
-              <input type="text" placeholder="YYYY" />
-            </div>
-          </div>
-        </div>
-        <div class="col-half">
-          <h4>Gender</h4>
-          <div class="input-group">
-            <input id="gender-male" type="radio" name="gender" value="male" />
-            <label for="gender-male">Male</label>
-            <input
-              id="gender-female"
-              type="radio"
-              name="gender"
-              value="female"
-            />
-            <label for="gender-female">Female</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <h4>Terms and Conditions</h4>
         <div class="input-group">
-          <input id="terms" type="checkbox" />
+          <input id="terms" type="checkbox" v-model="terms" />
           <label for="terms"
             >I accept the terms and conditions for signing up to this service,
             and hereby confirm I have read the privacy policy.</label
           >
+          <p class="error-title" v-if="!terms" ref="termCheck"></p>
         </div>
       </div>
       <button class="submit-button" type="submit">Submit</button>
@@ -90,11 +61,7 @@ export default {
       fullName: "",
       email: "",
       password: "",
-      gender: "",
       terms: false,
-      birthDay: "",
-      birthMonth: "",
-      birthYear: "",
     };
   },
   methods: {
@@ -102,11 +69,16 @@ export default {
       if (!value) {
         e.target.classList.add("error-bordered");
         e.target.nextSibling.nextSibling.textContent = `Please enter ${inputName}`;
-        console.log(inputName);
-        console.log(value);
       } else {
         e.target.classList.remove("error-bordered");
         e.target.nextSibling.nextSibling.textContent = "";
+      }
+    },
+    validateTerms() {
+      if (!this.terms) {
+        this.$refs.termCheck.style.fontWeight = "bold";
+        this.$refs.termCheck.textContent =
+          "Please accept our terms to continue...";
       }
     },
   },
