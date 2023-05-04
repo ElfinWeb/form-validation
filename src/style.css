@@ -237,6 +237,14 @@ select option {
   animation: button-anim 0.2s ease-out forwards;
 }
 
+.error-bordered {
+  border: 1px red solid;
+}
+
+.error-title {
+  color: red;
+}
+
 @media only screen and (max-width: 540px) {
   .col-half {
     width: 100%;
